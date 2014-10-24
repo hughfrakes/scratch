@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Example</title>
+		<style>
+			#wrap {
+				width: 450px;
+				height: 280px;
+				margin: 0 auto;
+			}
+
+			#wrap2 {
+				width: 300px;
+				height: 300px;
+				margin: 0 auto;
+			}
+
+			h3, li {
+				text-align: center;
+			}
+
+			li {
+				list-style: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+		</div>
+		<h3>Use an image as an overlay.</h3>
+		<ul>
+			<li>1)Create a div element</li>
+			<li>2)Define width and height of the div</li>
+			<li>3)Write some simple javascript code...</li>
+		</ul>
+		
+		<div id="wrap2">
+		</div>
+		<h3>Use a solid color an overlay.</h3>
+		<ul>
+			<li>1)Create a div element</li>
+			<li>2)Define width and height of the div</li>
+			<li>3)Write some simple javascript code...</li>
+		</ul>
+
+		<script src="../scratch.min.js"></script>
+		<script>
+			scratch({
+				div: "wrap",
+				targetImg: "targetImg.jpg",
+				overlayImg: "overlayImg.jpg",		//optional
+				overlayImgOpacity: 0.85,	//optional
+				scratchRadius: 25	//optional
+			});
+
+			scratch({
+				div: "wrap2",
+				targetImg: "targetImg.jpg",
+				fillColor: "#a5a5a5"	//optional
+			});
+		</script>
+	</body>
+</html>
