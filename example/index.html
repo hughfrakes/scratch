@@ -51,13 +51,19 @@
 				targetImg: "targetImg.jpg",
 				overlayImg: "overlayImg.jpg",		//optional
 				overlayImgOpacity: 0.85,	//optional
-				scratchRadius: 25	//optional
+				scratchRadius: 25,	//optional
+				completion: 0.95,	//optional
+				uncoverOnCompletion: true,		//optional
+				//optional
+				callback: function(){
+					console.log("Complete!");
+				}		
 			});
 
 			scratch({
 				div: "wrap2",
 				targetImg: "targetImg.jpg",
-				fillColor: "#a5a5a5"	//optional
+				fillColor: "#a5a5a5",	//optional
 			});
 		</script>
 	</body>

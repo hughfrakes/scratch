@@ -16,14 +16,20 @@
   * 	overlayImg: "overlayImg.jpg",		//optional param, the overlay image
   *	overlayImgOpacity: 0.8,		//optional param, the opacity of the overlay image
   * 	fillColor: "#ffffff",		//optional param, use a solid color instead of an image to cover the target image
-  * 	scratchRadius: 30 	           //optional param, the radius of scratch (px)
+  * 	scratchRadius: 30, 	           //optional param, the radius of scratch (px)
+  *	completion: 0.85,		//completion percentage to trigger callback
+  *	uncoverOnCompletion: true,		//uncover all elements when completion percentage reached
+  *	callback: function(){alert("Win!")}		//callback on completion
   *  }
  */ 
 
 function scratch(params) {
 	// Default options
-	if (!params.fillColor) params.fillColor = "#bababa"; // default fill color above
+	if (!params.fillColor) params.fillColor = "#bababa"; // default overlay fill color
 	if (!params.scratchRadius) params.scratchRadius = 20; // default radius of each scratch (px)
+	if (!params.completion) params.completion = 0.9; // default completion percentage to triger callback
+	if (!params.hasOwnProperty("uncoverOnCompletion")) params.uncoverOnCompletion = true; // uncover all elements when completion percentage reached in default
+	if (!params.callback) params.callback = function(){}; // default callback on completion
 
 	//Global variables
 	var wrapDiv;
@@ -104,5 +110,18 @@ function scratch(params) {
 	function eventUp(e) {
 		e.preventDefault();
 		mouseDown = false;
+		//Set callback function
+		var scratchedCount = 0;
+		var currentImgDataArr = ctx.getImageData(0,0,canvasWidth,canvasHeight).data;
+		for (var i = 3, l = currentImgDataArr.length; i < l; i +=4) {
+			if ( currentImgDataArr[i] == 0) {
+				scratchedCount++;
+			}
+		}
+		var completionCount = (currentImgDataArr.length/4)*params.completion;
+		if (scratchedCount >= completionCount) {
+			if (params.uncoverOnCompletion) ctx.fillRect(0,0,canvasWidth,canvasHeight);
+			params.callback();
+		}
 	}
 }
