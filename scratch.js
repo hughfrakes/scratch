@@ -60,7 +60,7 @@ function scratch(params) {
 	ctx = myCanvas.getContext("2d");
 	if (params.overlayImg) {
 		var overlayImg = new Image();
-		overlayImg.src = "overlayImg.jpg";
+		overlayImg.src = params.overlayImg;
 		overlayImg.onload = function() {
 			ctx.drawImage(overlayImg,0,0,canvasWidth,canvasHeight);
 			if (params.overlayImgOpacity) {
@@ -70,8 +70,8 @@ function scratch(params) {
 					overlayImgData.data[i] = Math.floor(255*opa);
 				}
 				ctx.putImageData(overlayImgData,0,0);
-				ctx.globalCompositeOperation = "destination-out";
 			}
+			ctx.globalCompositeOperation = "destination-out";
 		}
 	}
 	else {
